@@ -8,8 +8,7 @@ Halo! Ini adalah proyek tugas kelompok untuk membangun website profil program st
 
 _Silakan sesuaikan dengan nama dan NIM anggota kelompok:_
 
-- **[Nama Lengkap Anggota 1]** - (NIM: [NIM Anda])
-- **[Nama Lengkap Anggota 2]** - (NIM: [NIM Anda])
+- **Muhammad Yafi Azka** - (NIM: 24210003)
 
 ---
 
