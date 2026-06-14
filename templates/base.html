@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}{% endblock %} - S1 Teknik Informatika</title>
+    
+    <!-- Tailwind CSS Play CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            50: '#f5f3ff',
+                            100: '#ede9fe',
+                            200: '#ddd6fe',
+                            300: '#c084fc',
+                            400: '#a78bfa',
+                            500: '#8b5cf6',
+                            600: '#7c3aed',
+                            700: '#6d28d9',
+                            800: '#5b21b6',
+                            900: '#4c1d95',
+                        },
+                        accent: {
+                            50: '#ecfdf5',
+                            500: '#10b981',
+                            600: '#059669',
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['"Plus Jakarta Sans"', 'ui-sans-serif', 'system-ui', '-apple-system', 'BlinkMacSystemFont', '"Segoe UI"', 'Roboto', '"Helvetica Neue"', 'Arial', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    
+    <!-- Google Fonts: Plus Jakarta Sans & Outfit -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Lucide Icons (CDN) for modern icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <style>
+        .font-outfit {
+            font-family: 'Outfit', sans-serif;
+        }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-900 font-sans flex flex-col min-h-screen">
+
+    <!-- Header / Navbar -->
+    <header class="sticky top-0 z-50 backdrop-blur-md bg-white/80 border-b border-slate-200/80 transition-all duration-300">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-20">
+                <!-- Logo & Brand Name -->
+                <div class="flex items-center gap-3">
+                    <a href="/" class="flex items-center gap-3 group">
+                        <div class="w-11 h-11 bg-gradient-to-tr from-brand-600 to-violet-500 rounded-xl flex items-center justify-center text-white shadow-md shadow-brand-500/20 group-hover:scale-105 transition-transform duration-300">
+                            <i data-lucide="terminal" class="w-6 h-6"></i>
+                        </div>
+                        <div>
+                            <span class="block text-lg font-extrabold font-outfit tracking-tight text-slate-900 group-hover:text-brand-600 transition-colors duration-300">
+                                IF UNIVES
+                            </span>
+                            <span class="block text-xs font-semibold text-slate-500 uppercase tracking-widest -mt-1">
+                                Teknik Informatika
+                            </span>
+                        </div>
+                    </a>
+                </div>
+
+                <!-- Desktop Navigation Links -->
+                <nav class="hidden md:flex items-center space-x-1">
+                    <a href="/" class="px-4 py-2 rounded-lg text-sm font-semibold transition-all duration-200 {% if request.path == '/' %}bg-brand-50 text-brand-600{% else %}text-slate-600 hover:text-brand-600 hover:bg-slate-50{% endif %}">
+                        Home
+                    </a>
+                    <a href="/profil" class="px-4 py-2 rounded-lg text-sm font-semibold transition-all duration-200 {% if request.path == '/profil' %}bg-brand-50 text-brand-600{% else %}text-slate-600 hover:text-brand-600 hover:bg-slate-50{% endif %}">
+                        Profil Prodi
+                    </a>
+                    <a href="/dosen" class="px-4 py-2 rounded-lg text-sm font-semibold transition-all duration-200 {% if request.path == '/dosen' %}bg-brand-50 text-brand-600{% else %}text-slate-600 hover:text-brand-600 hover:bg-slate-50{% endif %}">
+                        Daftar Dosen
+                    </a>
+                    <a href="/mahasiswa" class="px-4 py-2 rounded-lg text-sm font-semibold transition-all duration-200 {% if request.path == '/mahasiswa' %}bg-brand-50 text-brand-600{% else %}text-slate-600 hover:text-brand-600 hover:bg-slate-50{% endif %}">
+                        Daftar Mahasiswa
+                    </a>
+                </nav>
+
+                <!-- Mobile Menu Button -->
+                <div class="flex md:hidden">
+                    <button id="mobile-menu-btn" type="button" class="inline-flex items-center justify-center p-2 rounded-lg text-slate-500 hover:text-brand-600 hover:bg-slate-100 focus:outline-none transition-colors duration-200" aria-controls="mobile-menu" aria-expanded="false">
+                        <i data-lucide="menu" class="w-6 h-6 block" id="menu-icon"></i>
+                        <i data-lucide="x" class="w-6 h-6 hidden" id="close-icon"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mobile Menu, show/hide based on menu state. -->
+        <div class="hidden md:hidden border-b border-slate-200 bg-white/95" id="mobile-menu">
+            <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
+                <a href="/" class="block px-3 py-2.5 rounded-lg text-base font-semibold {% if request.path == '/' %}bg-brand-50 text-brand-600{% else %}text-slate-600 hover:text-brand-600 hover:bg-slate-50{% endif %}">
+                    Home
+                </a>
+                <a href="/profil" class="block px-3 py-2.5 rounded-lg text-base font-semibold {% if request.path == '/profil' %}bg-brand-50 text-brand-600{% else %}text-slate-600 hover:text-brand-600 hover:bg-slate-50{% endif %}">
+                    Profil Prodi
+                </a>
+                <a href="/dosen" class="block px-3 py-2.5 rounded-lg text-base font-semibold {% if request.path == '/dosen' %}bg-brand-50 text-brand-600{% else %}text-slate-600 hover:text-brand-600 hover:bg-slate-50{% endif %}">
+                    Daftar Dosen
+                </a>
+                <a href="/mahasiswa" class="block px-3 py-2.5 rounded-lg text-base font-semibold {% if request.path == '/mahasiswa' %}bg-brand-50 text-brand-600{% else %}text-slate-600 hover:text-brand-600 hover:bg-slate-50{% endif %}">
+                    Daftar Mahasiswa
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content Area -->
+    <main class="flex-grow">
+        {% block content %}{% endblock %}
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-slate-900 text-slate-400 border-t border-slate-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                <!-- Branding column -->
+                <div class="md:col-span-2 space-y-4">
+                    <div class="flex items-center gap-3">
+                        <div class="w-10 h-10 bg-gradient-to-tr from-brand-600 to-violet-500 rounded-xl flex items-center justify-center text-white shadow-md shadow-brand-500/10">
+                            <i data-lucide="terminal" class="w-5 h-5"></i>
+                        </div>
+                        <span class="text-white font-extrabold font-outfit text-lg tracking-tight">
+                            IF UNIVES
+                        </span>
+                    </div>
+                    <p class="text-sm max-w-sm">
+                        Menyelenggarakan pendidikan Teknik Informatika berkualitas tinggi untuk menghasilkan lulusan yang berdaya saing global, inovatif, dan berintegritas.
+                    </p>
+                </div>
+
+                <!-- Navigation column -->
+                <div>
+                    <h3 class="text-white font-semibold text-sm uppercase tracking-wider mb-4 font-outfit">Tautan</h3>
+                    <ul class="space-y-2.5 text-sm">
+                        <li><a href="/" class="hover:text-white transition-colors duration-200">Home</a></li>
+                        <li><a href="/profil" class="hover:text-white transition-colors duration-200">Profil Prodi</a></li>
+                        <li><a href="/dosen" class="hover:text-white transition-colors duration-200">Daftar Dosen</a></li>
+                        <li><a href="/mahasiswa" class="hover:text-white transition-colors duration-200">Daftar Mahasiswa</a></li>
+                    </ul>
+                </div>
+
+                <!-- Contact Info column -->
+                <div>
+                    <h3 class="text-white font-semibold text-sm uppercase tracking-wider mb-4 font-outfit">Kontak</h3>
+                    <ul class="space-y-3 text-sm">
+                        <li class="flex items-start gap-2.5">
+                            <i data-lucide="map-pin" class="w-4 h-4 text-brand-400 mt-0.5 flex-shrink-0"></i>
+                            <span>Jl. Kampus Ilmu Komputer No. 12, Kota Akademik</span>
+                        </li>
+                        <li class="flex items-center gap-2.5">
+                            <i data-lucide="mail" class="w-4 h-4 text-brand-400 flex-shrink-0"></i>
+                            <span>informatika@univ.ac.id</span>
+                        </li>
+                        <li class="flex items-center gap-2.5">
+                            <i data-lucide="phone" class="w-4 h-4 text-brand-400 flex-shrink-0"></i>
+                            <span>(021) 555-0199</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <hr class="border-slate-800 my-8">
+
+            <div class="flex flex-col sm:flex-row items-center justify-between text-xs gap-4">
+                <p>&copy; 2026 S1 Teknik Informatika. All rights reserved.</p>
+                <div class="flex gap-4">
+                    <a href="#" class="hover:text-white transition-colors"><i data-lucide="facebook" class="w-4 h-4"></i></a>
+                    <a href="#" class="hover:text-white transition-colors"><i data-lucide="instagram" class="w-4 h-4"></i></a>
+                    <a href="#" class="hover:text-white transition-colors"><i data-lucide="twitter" class="w-4 h-4"></i></a>
+                    <a href="#" class="hover:text-white transition-colors"><i data-lucide="github" class="w-4 h-4"></i></a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Initialize Lucide Icons & Mobile Menu Script -->
+    <script>
+        lucide.createIcons();
+
+        const menuBtn = document.getElementById('mobile-menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+        const menuIcon = document.getElementById('menu-icon');
+        const closeIcon = document.getElementById('close-icon');
+
+        menuBtn.addEventListener('click', () => {
+            const isExpanded = menuBtn.getAttribute('aria-expanded') === 'true';
+            menuBtn.setAttribute('aria-expanded', !isExpanded);
+            mobileMenu.classList.toggle('hidden');
+            menuIcon.classList.toggle('hidden');
+            closeIcon.classList.toggle('hidden');
+        });
+    </script>
+</body>
+</html>
