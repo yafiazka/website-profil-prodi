@@ -32,7 +32,6 @@ website-profil-prodi/
 │
 ├── app.py                  # File utama python (konfigurasi Flask, routing, data dummy)
 ├── README.md               # Dokumentasi panduan proyek
-├── planning.md             # File rencana awal tugas kuliah
 │
 ├── static/                 # Folder penyimpanan aset tambahan (CSS, JS, Gambar)
 │   ├── css/
